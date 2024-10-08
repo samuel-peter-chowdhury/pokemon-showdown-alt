@@ -198,9 +198,7 @@
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (String(pokemon.name).toLowerCase() == 'cinderace') {
-				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
-			}
+			return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 		case 'move':
 			var move = this.engine.dex.moves.get(id);
 			return this.renderMoveRow(move, matchStart, matchLength, errorMessage, attrs);
