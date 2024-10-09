@@ -198,7 +198,7 @@ const filterList = [
 			i++;
 		}
 		if (!this.renderedIndex) {
-			this.el.innerHTML = '<ul class="utilichart" style="height:' + (40 * 33) + 'px">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
+			this.el.innerHTML = '<ul class="utilichart" style="height:fit-content">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
 			this.moreVisible = true;
 		} else {
 			if (this.moreVisible) {
@@ -307,8 +307,8 @@ const filterList = [
 		return 'Error: not found';
 	};
 	Search.prototype.renderPokemonSortRow = function () {
-		var buf = '<li class="result"><div class="sortrow">'
-		buf += '<select id="35-pokes-month" name="35-pokes-month" class="button">'
+		var buf = '<li class="result" style="display: flex; align-items: center; padding: 0 10px;">'
+		buf += '<select id="35-pokes-month" name="35-pokes-month" class="button" style="margin-right: 5px;">'
 		buf += '<option value="1">Jan</option>'
 		buf += '<option value="2">Feb</option>'
 		buf += '<option value="3">Mar</option>'
@@ -332,7 +332,7 @@ const filterList = [
 		buf += '<option value="2029">2029</option>'
 		buf += '<option value="2030">2030</option>'
 		buf += '</select>'
-		buf += '</div></li>';
+		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
 		buf += '<button class="sortcol numsortcol' + (!this.sortCol ? ' cur' : '') + '">' + (!this.sortCol ? 'Sort: ' : this.engine.firstPokemonColumn) + '</button>';
 		buf += '<button class="sortcol pnamesortcol' + (this.sortCol === 'name' ? ' cur' : '') + '" data-sort="name">Name</button>';
