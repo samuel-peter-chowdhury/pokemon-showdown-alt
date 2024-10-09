@@ -935,28 +935,28 @@ let monthFilter = 2;
 	Search.prototype.renderPokemonSortRow = function () {
 		var buf = '<li class="result" style="display: flex; align-items: center; padding: 0 10px;">'
 		buf += '<select id="35-pokes-month" name="35-pokes-month" class="button" style="margin-right: 5px;">'
-		buf += `<option value="1" selected="${monthFilter == 1 ? 'true' : 'false'}">Jan</option>`
-		buf += `<option value="2" selected="${monthFilter == 2 ? 'true' : 'false'}">Feb</option>`
-		buf += `<option value="3" selected="${monthFilter == 3 ? 'true' : 'false'}">Mar</option>`
-		buf += `<option value="4" selected="${monthFilter == 4 ? 'true' : 'false'}">Apr</option>`
-		buf += `<option value="5" selected="${monthFilter == 5 ? 'true' : 'false'}">May</option>`
-		buf += `<option value="6" selected="${monthFilter == 6 ? 'true' : 'false'}">Jun</option>`
-		buf += `<option value="7" selected="${monthFilter == 7 ? 'true' : 'false'}">Jul</option>`
-		buf += `<option value="8" selected="${monthFilter == 8 ? 'true' : 'false'}">Aug</option>`
-		buf += `<option value="9" selected="${monthFilter == 9 ? 'true' : 'false'}">Sep</option>`
-		buf += `<option value="10" selected="${monthFilter == 10 ? 'true' : 'false'}">Oct</option>`
-		buf += `<option value="11" selected="${monthFilter == 11 ? 'true' : 'false'}">Nov</option>`
-		buf += `<option value="12" selected="${monthFilter == 12 ? 'true' : 'false'}">Dec</option>`
+		buf += `<option value="1"${monthFilter == 1 ? ' selected' : ''}">Jan</option>`
+		buf += `<option value="2"${monthFilter == 2 ? ' selected' : ''}">Feb</option>`
+		buf += `<option value="3"${monthFilter == 3 ? ' selected' : ''}">Mar</option>`
+		buf += `<option value="4"${monthFilter == 4 ? ' selected' : ''}">Apr</option>`
+		buf += `<option value="5"${monthFilter == 5 ? ' selected' : ''}">May</option>`
+		buf += `<option value="6"${monthFilter == 6 ? ' selected' : ''}">Jun</option>`
+		buf += `<option value="7"${monthFilter == 7 ? ' selected' : ''}">Jul</option>`
+		buf += `<option value="8"${monthFilter == 8 ? ' selected' : ''}">Aug</option>`
+		buf += `<option value="9"${monthFilter == 9 ? ' selected' : ''}">Sep</option>`
+		buf += `<option value="10"${monthFilter == 10 ? ' selected' : ''}">Oct</option>`
+		buf += `<option value="11"${monthFilter == 11 ? ' selected' : ''}">Nov</option>`
+		buf += `<option value="12"${monthFilter == 12 ? ' selected' : ''}">Dec</option>`
 		buf += '</select>'
 		buf += '<select id="35-pokes-year" name="35-pokes-year" class="button" style="margin-right: 5px;">'
-		buf += `<option value="2023" selected="${yearFilter == 2023 ? 'true' : 'false'}">2023</option>`
-		buf += `<option value="2024" selected="${yearFilter == 2024 ? 'true' : 'false'}">2024</option>`
-		buf += `<option value="2025" selected="${yearFilter == 2025 ? 'true' : 'false'}">2025</option>`
-		buf += `<option value="2026" selected="${yearFilter == 2026 ? 'true' : 'false'}">2026</option>`
-		buf += `<option value="2027" selected="${yearFilter == 2027 ? 'true' : 'false'}">2027</option>`
-		buf += `<option value="2028" selected="${yearFilter == 2028 ? 'true' : 'false'}">2028</option>`
-		buf += `<option value="2029" selected="${yearFilter == 2029 ? 'true' : 'false'}">2029</option>`
-		buf += `<option value="2030" selected="${yearFilter == 2030 ? 'true' : 'false'}">2030</option>`
+		buf += `<option value="2023"${yearFilter == 2023 ? ' selected' : ''}">2023</option>`
+		buf += `<option value="2024"${yearFilter == 2024 ? ' selected' : ''}">2024</option>`
+		buf += `<option value="2025"${yearFilter == 2025 ? ' selected' : ''}">2025</option>`
+		buf += `<option value="2026"${yearFilter == 2026 ? ' selected' : ''}">2026</option>`
+		buf += `<option value="2027"${yearFilter == 2027 ? ' selected' : ''}">2027</option>`
+		buf += `<option value="2028"${yearFilter == 2028 ? ' selected' : ''}">2028</option>`
+		buf += `<option value="2029"${yearFilter == 2029 ? ' selected' : ''}">2029</option>`
+		buf += `<option value="2030"${yearFilter == 2030 ? ' selected' : ''}">2030</option>`
 		buf += '</select>'
 		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" style="width: 50px; height: 18px; margin-right: 5px;">'
 		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 18px;">Filter</button>'
