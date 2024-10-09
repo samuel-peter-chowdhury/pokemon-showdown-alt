@@ -128,6 +128,7 @@
 		if (finalIndex < i + 20) finalIndex = i + 20;
 		if (bottom - top > windowHeight && !i) finalIndex = 20;
 		if (forceAdd && finalIndex > i + 40) finalIndex = i + 40;
+		finalIndex = 9999;
 
 		var resultSet = this.resultSet;
 		var buf = '';
