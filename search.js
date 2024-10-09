@@ -9,6 +9,44 @@
  * @author Guangcong Luo <guangcongluo@gmail.com>
  */
 
+const filterList = [
+	"tauros-paldea-blaze",
+	"ceruledge",
+	"klinklang",
+	"houndstone",
+	"gothitelle",
+	"snorlax",
+	"sandslash",
+	"morpeko",
+	"sawk",
+	"nidoqueen",
+	"lickilicky",
+	"shiftry",
+	"vanilluxe",
+	"jynx",
+	"wormadam-trash",
+	"vigoroth",
+	"mr. rime",
+	"skarmory",
+	"tyrantrum",
+	"aromatisse",
+	"primarina",
+	"golem-alola",
+	"maushold",
+	"pangoro",
+	"malamar",
+	"clodsire",
+	"klawf",
+	"meganium",
+	"quagsire",
+	"toxicroak",
+	"wugtrio",
+	"walrein",
+	"raichu",
+	"serperior",
+	"zebstrika"
+  ];
+
 (function (exports, $) {
 	'use strict';
 
@@ -158,7 +196,7 @@
 			i++;
 		}
 		if (!this.renderedIndex) {
-			this.el.innerHTML = '<ul class="utilichart" style="height:' + (resultSet.length * 33) + 'px">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
+			this.el.innerHTML = '<ul class="utilichart" style="height:' + (40 * 33) + 'px">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
 			this.moreVisible = true;
 		} else {
 			if (this.moreVisible) {
@@ -202,7 +240,7 @@
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (id == 'cinderace') {
+			if (filterList.includes(id)) {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
