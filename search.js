@@ -47,6 +47,8 @@ const filterList = [
 	"zebstrika"
   ];
 
+  console.log(document.currentScript.src);
+
 (function (exports, $) {
 	'use strict';
 
