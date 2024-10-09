@@ -194,14 +194,15 @@
 		case 'html':
 			return '<li class="result">' + id + '</li>';
 		case 'header':
-			return '<li class="result"><h3>' + id + '</h3></li>';
+			return '';
+			//return '<li class="result"><h3>' + id + '</h3></li>';
 		case 'sortpokemon':
 			return this.renderPokemonSortRow();
 		case 'sortmove':
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (BattleLog.escapeHTML(pokemon.name).toLowerCase() == 'cinderace') {
+			if (id == 'cinderace') {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
