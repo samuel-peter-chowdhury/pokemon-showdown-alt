@@ -718,7 +718,7 @@ let monthFilter = 2;
 			yearFilter = document.getElementById("35-pokes-year").value;
 			monthFilter = document.getElementById("35-pokes-month").value;
 			console.log(yearFilter, monthFilter);
-			self.updateScroll();
+			self.find('');
 		});
 	}
 
