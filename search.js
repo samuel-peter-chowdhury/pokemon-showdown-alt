@@ -709,6 +709,11 @@ const filterMap = new Map(
 			self.sortCol = self.engine.sortCol;
 			self.find('');
 		});
+		this.$el.on('click', '#35-pokes-filter-button', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('fart');
+		});
 	}
 
 	Search.prototype.$ = function (query) {
@@ -948,7 +953,7 @@ const filterMap = new Map(
 		buf += '<option value="2029">2029</option>'
 		buf += '<option value="2030">2030</option>'
 		buf += '</select>'
-		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox chartinput" value autocomplete="off" style="margin-right: 5px;">'
+		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" style="width: 30px; margin-right: 5px;">'
 		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button">Filter</button>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
