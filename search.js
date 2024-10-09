@@ -717,8 +717,9 @@ let monthFilter = 2;
 			e.stopPropagation();
 			yearFilter = document.getElementById("35-pokes-year").value;
 			monthFilter = document.getElementById("35-pokes-month").value;
-			console.log(yearFilter, monthFilter);
-			self.find('');
+			self.renderedIndex = 0;
+			self.renderingDone = false;
+			self.updateScroll();
 		});
 	}
 
@@ -731,13 +732,11 @@ let monthFilter = 2;
 	//
 
 	Search.prototype.find = function (query, firstElem) {
-		console.log(query);
 		if (!this.engine.find(query)) return; // nothing changed
 
 		this.exactMatch = this.engine.exactMatch;
 		this.q = this.engine.query;
 		this.resultSet = this.engine.results;
-		console.log(this.resultSet);
 		if (firstElem) {
 			this.resultSet = [[this.engine.typedSearch.searchType, firstElem]].concat(this.resultSet);
 			if (this.resultSet.length > 1 && ['sortpokemon', 'sortmove'].includes(this.resultSet[1][0])) {
