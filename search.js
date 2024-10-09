@@ -203,7 +203,7 @@
 			if (BattleLog.escapeHTML(pokemon.name).toLowerCase() == 'cinderace') {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
-				return '<li class="result">' + id + '</li>';
+				return '';
 			}
 		case 'move':
 			var move = this.engine.dex.moves.get(id);
