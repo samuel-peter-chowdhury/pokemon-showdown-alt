@@ -665,6 +665,9 @@ const filterMap = new Map(
 	]
 );
 
+let yearFilter = 2024;
+let monthFilter = 2;
+
 (function (exports, $) {
 	'use strict';
 
@@ -712,7 +715,10 @@ const filterMap = new Map(
 		this.$el.on('click', '#35-pokes-filter-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			console.log('fart');
+			yearFilter = this.$el.find('#35-pokes-year').val();
+			monthFilter = this.$el.find('#35-pokes-month').val();
+			console.log(yearFilter, monthFilter);
+			self.updateScroll();
 		});
 	}
 
@@ -863,7 +869,7 @@ const filterMap = new Map(
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (filterMap.get("2023_8").includes(id)) {
+			if (filterMap.get(`${String(yearFilter)}_${String(monthFilter)}`).includes(id)) {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
@@ -953,7 +959,7 @@ const filterMap = new Map(
 		buf += '<option value="2029">2029</option>'
 		buf += '<option value="2030">2030</option>'
 		buf += '</select>'
-		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" style="width: 30px; margin-right: 5px;">'
+		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" style="width: 50px; margin-right: 5px;">'
 		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button">Filter</button>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
