@@ -715,8 +715,8 @@ let monthFilter = 2;
 		this.$el.on('click', '#35-pokes-filter-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			yearFilter = this.$el.find('#35-pokes-year').val();
-			monthFilter = this.$el.find('#35-pokes-month').val();
+			yearFilter = document.getElementById("35-pokes-year").value;
+			monthFilter = document.getElementById("35-pokes-month").value;
 			console.log(yearFilter, monthFilter);
 			self.updateScroll();
 		});
