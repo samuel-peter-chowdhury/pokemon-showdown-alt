@@ -959,7 +959,7 @@ let monthFilter = 2;
 		buf += `<option value="2030"${yearFilter == 2030 ? ' selected="selected"' : ''}">2030</option>`
 		buf += '</select>'
 		buf += '<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" style="width: 50px; height: 18px; margin-right: 5px;">'
-		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 18px;">Filter</button>'
+		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 24px;">Filter</button>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
 		buf += '<button class="sortcol numsortcol' + (!this.sortCol ? ' cur' : '') + '">' + (!this.sortCol ? 'Sort: ' : this.engine.firstPokemonColumn) + '</button>';
