@@ -64,11 +64,13 @@
 	//
 
 	Search.prototype.find = function (query, firstElem) {
+		console.log(query);
 		if (!this.engine.find(query)) return; // nothing changed
 
 		this.exactMatch = this.engine.exactMatch;
 		this.q = this.engine.query;
 		this.resultSet = this.engine.results;
+		console.log(this.resultSet);
 		if (firstElem) {
 			this.resultSet = [[this.engine.typedSearch.searchType, firstElem]].concat(this.resultSet);
 			if (this.resultSet.length > 1 && ['sortpokemon', 'sortmove'].includes(this.resultSet[1][0])) {
