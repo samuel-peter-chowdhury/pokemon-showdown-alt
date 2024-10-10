@@ -357,7 +357,8 @@ function copyTextToClipboard(text) {
 		return 'Error: not found';
 	};
 	Search.prototype.renderPokemonSortRow = function () {
-		var buf = '<li class="result" style="display: flex; align-items: center; padding: 0 10px;">'
+		var buf = '<li class="result" style="display: flex; align-items: center; padding: 0 10px; justify-content: space-between">'
+		buf += '<div style="display: flex; align-items: center;">'
 		buf += '<select id="35-pokes-month" name="35-pokes-month" class="button" style="margin-right: 5px;">'
 		buf += `<option value="1"${monthFilter == 1 ? ' selected="selected"' : ''}">Jan</option>`
 		buf += `<option value="2"${monthFilter == 2 ? ' selected="selected"' : ''}">Feb</option>`
@@ -385,7 +386,10 @@ function copyTextToClipboard(text) {
 		buf += `<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" value="${altFilter}" style="width: 50px; height: 18px; margin-right: 5px;">`
 		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 24px; margin-right: 5px;">Filter</button>'
 		buf += '<button id="35-pokes-copy-button" name="35-pokes-copy-button" class="button" style="height: 24px;">Challenge Code</button>'
-		buf += '<button id="35-pokes-power-button" name="35-pokes-power-button" class="button" style="height: 24px;"><i class="fa fa-power-off" style="color: #00dd20;"></i></button>'
+		buf += '</div>'
+		buf += '<div style="display: flex; align-items: center;">'
+		buf += `<button id="35-pokes-power-button" name="35-pokes-power-button" class="button" style="height: 24px; margin-right: 10px;"><i class="fa fa-power-off" style="color: #008000;"></i></button>`
+		buf += '</div>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
 		buf += '<button class="sortcol numsortcol' + (!this.sortCol ? ' cur' : '') + '">' + (!this.sortCol ? 'Sort: ' : this.engine.firstPokemonColumn) + '</button>';
