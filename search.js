@@ -9,6 +9,7 @@
  * @author Guangcong Luo <guangcongluo@gmail.com>
  */
 const metaList = ["2023_7", "2023_8", "2023_9", "2023_10", "2023_10_B", "2023_11", "2023_12", "2024_1", "2024_2", "2024_3", "2024_4", "2024_5", "2024_6", "2024_7", "2024_8", "2024_9", "2024_10"];
+const challengeCodePrefix = '/challenge gen9nationaldexag @@@ Z-Move Clause, -Mega, Terastal Clause, Sleep Clause Mod, Forme Clause, -Hidden Power, -Last Respects, -Kings Rock, -Shadow Tag, -Acupressure, -Battle Bond, -Quick Claw, -Razor Fang, Evasion Clause, OHKO Clause, baton pass stat trap clause, -All Pokemon, +';
 const metaMap = new Map();
 metaList.forEach((date) => {
 	$.getJSON(`https://samuel-peter-chowdhury.github.io/35PokesShowdownFilter/dates/${date}.json`, function(data) {
@@ -31,6 +32,45 @@ let altFilter = localStorage.getItem("35-pokes-alt");
 if (!altFilter) {
 	altFilter = '';
 	localStorage.setItem("35-pokes-alt", altFilter);
+}
+
+function getMeta() {
+	return `${String(yearFilter)}_${String(monthFilter)}${(altFilter != '' && altFilter != undefined && altFilter != null) ? ('_' + altFilter) : ''}`;
+}
+
+function fallbackCopyTextToClipboard(text) {
+	var textArea = document.createElement("textarea");
+	textArea.value = text;
+	
+	textArea.style.top = "0";
+	textArea.style.left = "0";
+	textArea.style.position = "fixed";
+  
+	document.body.appendChild(textArea);
+	textArea.focus();
+	textArea.select();
+  
+	try {
+	  var successful = document.execCommand('copy');
+	  var msg = successful ? 'successful' : 'unsuccessful';
+	  console.log('Fallback: Copying text command was ' + msg);
+	} catch (err) {
+	  console.error('Fallback: Oops, unable to copy', err);
+	}
+	
+	document.body.removeChild(textArea);
+}
+
+function copyTextToClipboard(text) {
+	if (!navigator.clipboard) {
+	  fallbackCopyTextToClipboard(text);
+	  return;
+	}
+	navigator.clipboard.writeText(text).then(function() {
+	  console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	  console.error('Async: Could not copy text: ', err);
+	});
 }
 
 (function (exports, $) {
@@ -89,6 +129,12 @@ if (!altFilter) {
 			self.renderedIndex = 0;
 			self.renderingDone = false;
 			self.updateScroll();
+		});
+		this.$el.on('click', '#35-pokes-copy-button', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			const pokemonList = Array.from(metaMap.get(getMeta())).join(', +');
+			copyTextToClipboard(challengeCodePrefix + pokemonList);
 		});
 	}
 
@@ -241,7 +287,7 @@ if (!altFilter) {
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (metaMap.get(`${String(yearFilter)}_${String(monthFilter)}${(altFilter != '' && altFilter != undefined && altFilter != null) ? ('_' + altFilter) : ''}`).has(id)) {
+			if (metaMap.get(getMeta()).has(id)) {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
@@ -332,7 +378,8 @@ if (!altFilter) {
 		buf += `<option value="2030"${yearFilter == 2030 ? ' selected="selected"' : ''}">2030</option>`
 		buf += '</select>'
 		buf += `<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" value="${altFilter}" style="width: 50px; height: 18px; margin-right: 5px;">`
-		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 24px;">Filter</button>'
+		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 24px; margin-right: 5px;">Filter</button>'
+		buf += '<button id="35-pokes-copy-button" name="35-pokes-copy-button" class="button" style="height: 24px; margin-right: 5px;">Challenge Code</button>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
 		buf += '<button class="sortcol numsortcol' + (!this.sortCol ? ' cur' : '') + '">' + (!this.sortCol ? 'Sort: ' : this.engine.firstPokemonColumn) + '</button>';
