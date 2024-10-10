@@ -229,8 +229,8 @@ if (!altFilter) {
 		case 'html':
 			return '<li class="result">' + id + '</li>';
 		case 'header':
-			return '';
-			//return '<li class="result"><h3>' + id + '</h3></li>';
+			//return '';
+			return '<li class="result"><h3>' + id + '</h3></li>';
 		case 'sortpokemon':
 			return this.renderPokemonSortRow();
 		case 'sortmove':
