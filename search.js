@@ -34,8 +34,8 @@ if (!altFilter) {
 	localStorage.setItem("35-pokes-alt", altFilter);
 }
 
-function getMeta() {
-	return `${String(yearFilter)}_${String(monthFilter)}${(altFilter != '' && altFilter != undefined && altFilter != null) ? ('_' + altFilter) : ''}`;
+function getMeta(year, month, alt) {
+	return `${String(year)}_${String(month)}${(alt != '' && alt != undefined && alt != null) ? ('_' + alt) : ''}`;
 }
 
 function fallbackCopyTextToClipboard(text) {
@@ -120,20 +120,25 @@ function copyTextToClipboard(text) {
 		this.$el.on('click', '#35-pokes-filter-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			yearFilter = document.getElementById("35-pokes-year").value;
-			localStorage.setItem("35-pokes-year", yearFilter);
-			monthFilter = document.getElementById("35-pokes-month").value;
-			localStorage.setItem("35-pokes-month", monthFilter);
-			altFilter = document.getElementById("35-pokes-alt").value;
-			localStorage.setItem("35-pokes-alt", altFilter);
-			self.renderedIndex = 0;
-			self.renderingDone = false;
-			self.updateScroll();
+			tempYear = document.getElementById("35-pokes-year").value;
+			tempMonth = document.getElementById("35-pokes-month").value;
+			tempAlt = document.getElementById("35-pokes-alt").value;
+			if (metaMap.has(getMeta(tempYear, tempMonth, tempAlt))) {
+				yearFilter = tempYear;
+				localStorage.setItem("35-pokes-year", yearFilter);
+				monthFilter = tempMonth;
+				localStorage.setItem("35-pokes-month", monthFilter);
+				altFilter = tempAlt;
+				localStorage.setItem("35-pokes-alt", altFilter);
+				self.renderedIndex = 0;
+				self.renderingDone = false;
+				self.updateScroll();
+			}
 		});
 		this.$el.on('click', '#35-pokes-copy-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			const pokemonList = Array.from(metaMap.get(getMeta())).join(', +');
+			const pokemonList = Array.from(metaMap.get(getMeta(yearFilter, monthFilter, altFilter))).join(', +');
 			copyTextToClipboard(challengeCodePrefix + pokemonList);
 		});
 	}
@@ -287,7 +292,7 @@ function copyTextToClipboard(text) {
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (metaMap.get(getMeta()).has(id)) {
+			if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(id)) {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
