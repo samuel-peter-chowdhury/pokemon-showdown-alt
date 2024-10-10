@@ -8,7 +8,14 @@
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
  */
-
+const metaList = ["2023_7", "2023_8", "2023_9", "2023_10", "2023_10_B", "2023_11", "2023_12", "2024_1", "2024_2", "2024_3", "2024_4", "2024_5", "2024_6", "2024_7", "2024_8", "2024_9", "2024_10"];
+const metaMap = new Map();
+metaList.forEach((date) => {
+	$.getJSON(`https://samuel-peter-chowdhury.github.io/35PokesShowdownFilter/dates/${date}.json`, function(data) {
+		const set = new Set(data);
+		metaMap.set(date, set);
+	});
+});
 const filterMap = new Map(
 	[
 		["2023_7", [
@@ -868,7 +875,7 @@ let monthFilter = 2;
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (filterMap.get(`${String(yearFilter)}_${String(monthFilter)}`).includes(id)) {
+			if (metaMap.get(`${String(yearFilter)}_${String(monthFilter)}`).has(id)) {
 				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			} else {
 				return '';
