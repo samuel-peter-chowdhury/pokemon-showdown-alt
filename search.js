@@ -229,8 +229,12 @@ if (!altFilter) {
 		case 'html':
 			return '<li class="result">' + id + '</li>';
 		case 'header':
-			//return '';
-			return '<li class="result"><h3>' + id + '</h3></li>';
+			const lowerId = id.toLowerCase();
+			if (lowerId.includes('items') || lowerId.includes('abilit') || lowerId.includes('moves')) {
+				return '<li class="result"><h3>' + id + '</h3></li>';
+			} else {
+				return '';
+			}
 		case 'sortpokemon':
 			return this.renderPokemonSortRow();
 		case 'sortmove':
