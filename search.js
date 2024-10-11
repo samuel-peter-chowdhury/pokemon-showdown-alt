@@ -311,8 +311,8 @@ function copyTextToClipboard(text) {
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
 			if (powerState) {
-				const lowerId = id.toLowerCase();
-				if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(lowerId)) {
+				const lowerName = BattleLog.escapeHTML(pokemon.name).toLowerCase();
+				if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(lowerName)) {
 					return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 				} else {
 					return '';
