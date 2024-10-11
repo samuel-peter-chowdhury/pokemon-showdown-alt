@@ -323,8 +323,8 @@ function copyTextToClipboard(text) {
 		case 'move':
 			var move = this.engine.dex.moves.get(id);
 			if (powerState) {
-				const lowerId = id.toLowerCase();
-				if (lowerId.includes('hidden power')) {
+				var name = move.name.toLowerCase();
+				if (name.includes('hidden power')) {
 					return '';
 				} else {
 					return this.renderMoveRow(move, matchStart, matchLength, errorMessage, attrs);
