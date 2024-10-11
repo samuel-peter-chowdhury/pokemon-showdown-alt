@@ -125,9 +125,9 @@ function copyTextToClipboard(text) {
 		this.$el.on('click', '#35-pokes-filter-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			tempYear = document.getElementById("35-pokes-year").value;
-			tempMonth = document.getElementById("35-pokes-month").value;
-			tempAlt = document.getElementById("35-pokes-alt").value;
+			let tempYear = document.getElementById("35-pokes-year").value;
+			let tempMonth = document.getElementById("35-pokes-month").value;
+			let tempAlt = document.getElementById("35-pokes-alt").value;
 			if (metaMap.has(getMeta(tempYear, tempMonth, tempAlt))) {
 				yearFilter = tempYear;
 				localStorage.setItem("35-pokes-year", yearFilter);
