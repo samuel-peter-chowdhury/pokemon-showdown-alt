@@ -311,7 +311,8 @@ function copyTextToClipboard(text) {
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
 			if (powerState) {
-				if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(id)) {
+				const lowerId = id.toLowerCase();
+				if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(lowerId)) {
 					return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 				} else {
 					return '';
@@ -321,7 +322,16 @@ function copyTextToClipboard(text) {
 			}
 		case 'move':
 			var move = this.engine.dex.moves.get(id);
-			return this.renderMoveRow(move, matchStart, matchLength, errorMessage, attrs);
+			if (powerState) {
+				const lowerId = id.toLowerCase();
+				if (lowerId.includes('hidden power')) {
+					return '';
+				} else {
+					return this.renderMoveRow(move, matchStart, matchLength, errorMessage, attrs);
+				}
+			} else {
+				return this.renderMoveRow(move, matchStart, matchLength, errorMessage, attrs);
+			}
 		case 'item':
 			var item = this.engine.dex.items.get(id);
 			return this.renderItemRow(item, matchStart, matchLength, errorMessage, attrs);
@@ -398,12 +408,6 @@ function copyTextToClipboard(text) {
 		buf += '<select id="35-pokes-year" name="35-pokes-year" class="button" style="margin-right: 5px;">'
 		buf += `<option value="2023"${yearFilter == 2023 ? ' selected="selected"' : ''}">2023</option>`
 		buf += `<option value="2024"${yearFilter == 2024 ? ' selected="selected"' : ''}">2024</option>`
-		buf += `<option value="2025"${yearFilter == 2025 ? ' selected="selected"' : ''}">2025</option>`
-		buf += `<option value="2026"${yearFilter == 2026 ? ' selected="selected"' : ''}">2026</option>`
-		buf += `<option value="2027"${yearFilter == 2027 ? ' selected="selected"' : ''}">2027</option>`
-		buf += `<option value="2028"${yearFilter == 2028 ? ' selected="selected"' : ''}">2028</option>`
-		buf += `<option value="2029"${yearFilter == 2029 ? ' selected="selected"' : ''}">2029</option>`
-		buf += `<option value="2030"${yearFilter == 2030 ? ' selected="selected"' : ''}">2030</option>`
 		buf += '</select>'
 		buf += `<input type="text" id="35-pokes-alt" name="35-pokes-alt" class="textbox" value="${altFilter}" style="width: 50px; height: 18px; margin-right: 5px;">`
 		buf += '<button id="35-pokes-filter-button" name="35-pokes-filter-button" class="button" style="height: 24px; margin-right: 5px;">Filter</button>'
