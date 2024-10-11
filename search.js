@@ -33,6 +33,11 @@ if (!altFilter) {
 	altFilter = '';
 	localStorage.setItem("35-pokes-alt", altFilter);
 }
+let powerState = localStorage.getItem("35-pokes-power");
+if (!powerState) {
+	powerState = true;
+	localStorage.setItem("35-pokes-power", powerState);
+}
 
 function getMeta(year, month, alt) {
 	return `${String(year)}_${String(month)}${(alt != '' && alt != undefined && alt != null) ? ('_' + alt) : ''}`;
@@ -135,6 +140,15 @@ function copyTextToClipboard(text) {
 				self.updateScroll();
 			}
 		});
+		this.$el.on('click', '#35-pokes-power-button', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			powerState = !powerState;
+			localStorage.setItem("35-pokes-power", powerState);
+			self.renderedIndex = 0;
+			self.renderingDone = false;
+			self.updateScroll();
+		});
 		this.$el.on('click', '#35-pokes-copy-button', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -214,7 +228,7 @@ function copyTextToClipboard(text) {
 		if (finalIndex < i + 20) finalIndex = i + 20;
 		if (bottom - top > windowHeight && !i) finalIndex = 20;
 		if (forceAdd && finalIndex > i + 40) finalIndex = i + 40;
-		finalIndex = 9999;
+		if (powerState) finalIndex = 9999;
 
 		var resultSet = this.resultSet;
 		var buf = '';
@@ -244,7 +258,7 @@ function copyTextToClipboard(text) {
 			i++;
 		}
 		if (!this.renderedIndex) {
-			this.el.innerHTML = '<ul class="utilichart" style="height:fit-content">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
+			this.el.innerHTML = `<ul class="utilichart" style="height: ${powerState ? 'fit-content' : resultSet.length * 33}">` + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
 			this.moreVisible = true;
 		} else {
 			if (this.moreVisible) {
@@ -280,11 +294,15 @@ function copyTextToClipboard(text) {
 		case 'html':
 			return '<li class="result">' + id + '</li>';
 		case 'header':
-			const lowerId = id.toLowerCase();
-			if (lowerId.includes('items') || lowerId.includes('abilit') || lowerId.includes('moves')) {
-				return '<li class="result"><h3>' + id + '</h3></li>';
+			if (powerState) {
+				const lowerId = id.toLowerCase();
+				if (lowerId.includes('items') || lowerId.includes('abilit') || lowerId.includes('moves')) {
+					return '<li class="result"><h3>' + id + '</h3></li>';
+				} else {
+					return '';
+				}
 			} else {
-				return '';
+				return '<li class="result"><h3>' + id + '</h3></li>';
 			}
 		case 'sortpokemon':
 			return this.renderPokemonSortRow();
@@ -292,10 +310,14 @@ function copyTextToClipboard(text) {
 			return this.renderMoveSortRow();
 		case 'pokemon':
 			var pokemon = this.engine.dex.species.get(id);
-			if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(id)) {
-				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
+			if (powerState) {
+				if (metaMap.get(getMeta(yearFilter, monthFilter, altFilter)).has(id)) {
+					return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
+				} else {
+					return '';
+				}
 			} else {
-				return '';
+				return this.renderPokemonRow(pokemon, matchStart, matchLength, errorMessage, attrs);
 			}
 		case 'move':
 			var move = this.engine.dex.moves.get(id);
@@ -388,7 +410,7 @@ function copyTextToClipboard(text) {
 		buf += '<button id="35-pokes-copy-button" name="35-pokes-copy-button" class="button" style="height: 24px;">Challenge Code</button>'
 		buf += '</div>'
 		buf += '<div style="display: flex; align-items: center;">'
-		buf += `<button id="35-pokes-power-button" name="35-pokes-power-button" class="button" style="height: 24px; margin-right: 10px;"><i class="fa fa-power-off" style="color: #008000;"></i></button>`
+		buf += `<button id="35-pokes-power-button" name="35-pokes-power-button" class="button" style="height: 24px; margin-right: 12px;"><i class="fa fa-power-off" style="color: ${powerState ? '#008000' : '#b22222'};"></i></button>`
 		buf += '</div>'
 		buf += '</li>';
 		buf += '<li class="result"><div class="sortrow">';
